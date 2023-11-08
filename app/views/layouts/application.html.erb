@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>TestAppMaindeck</title>
+    <meta name="turbo-cache-control" content="no-cache">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body>
+    <nav class="flex justify-between p-5 bg-blue-200 shadow-md">
+      <% if user_signed_in? %>
+        <div class="font-semibold"> <%= current_user.email %> </div>
+        <%= button_to "Sign out", destroy_user_session_path, method: :delete %>
+      <% else %>
+        <div class="font-semibold"> You are not signed in, but still can view lists! </div> 
+        <%= button_to "Sign in", new_user_session_path %>
+      <% end %>
+    </nav>
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p> 
+    <main class="mt-28 px-5 w-full">
+      <%= yield %>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,18 @@
+<% title = local_assigns.fetch(:title, "Modal") %>
+
+<%= turbo_frame_tag "modal" do %>
+  <div class="fixed inset-0 z-50 flex items-center justify-center p-4" data-controller="modal" data-modal-target="modal">
+    <div class="absolute inset-0 bg-black opacity-50"></div>
+    <div class="relative max-w-md mx-auto p-6 bg-white rounded shadow-lg">
+      <div class="flex justify-between items-center">
+        <h1><%= title %></h1>
+        <%= link_to "", data: { action: "click->modal#close" } do %>
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        <% end %>
+      </div>
+      <%= yield %>
+    </div>
+  </div>
+<% end %>
