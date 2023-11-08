@@ -1,0 +1,5 @@
+<%= render 'shared/modal', title: "New Task" do %>
+  <%= form_with(model: @task, url: to_do_list_section_tasks_path(@section.to_do_list, @section), class: "mb-7") do |form| %>
+    <%= render "form", form: %>
+  <% end %>
+<% end %>  
