@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
+  default_form_builder TailwindFormBuilder
+
   include Pundit::Authorization
-  
+
   rescue_from Pundit::NotAuthorizedError, with: :pundishing_user
 
   before_action :set_current_user, if: :user_signed_in?

@@ -1,6 +1,6 @@
-<div class="w-full bg-yellow-200 my-2 px-4" id=<%= dom_id section %>>
+<div class="w-full my-2 px-4 border-b-2" id=<%= dom_id section %>>
   <div class="flex justify-between items-center">
-    <h1><%= section.title %></h1>
+    <h1 class="break-words w-2/3 border-b-2"><%= section.title %></h1>
     <% unless section.to_do_list.is_template || user.blank? %>
       <% if user_policy %>
         <div class="flex gap-1">
@@ -14,9 +14,9 @@
       <% end %>  
     <% end %>
   </div>
-  <div class="px-6">
+  <div class="px-3">
     <div id="section_<%= section.id %>_tasks">
-      <% section.tasks.each do |task|%>
+      <% section.tasks.order(created_at: :asc).each do |task|%>
         <%= render task, user: user, user_policy: user_policy %>
       <% end %>
     </div>

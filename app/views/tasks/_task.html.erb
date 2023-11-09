@@ -1,6 +1,6 @@
-<div class="w-full bg-yellow-200 my-2" id=<%= dom_id task %>>
+<div class="w-full my-2" id=<%= dom_id task %>>
   <div class="flex items-center">
-    <h1 class="px-6"><%= task.title %></h1>
+    <h1 class="break-words w-2/3"><%= task.title %></h1>
     <% unless task.section.to_do_list.is_template || user.blank? %>
       <% if user_policy %>
         <div class="flex gap-1">
@@ -14,5 +14,5 @@
       <% end %>
     <% end %>
   </div>
-  <h1 class="px-6"><%= task.description %></h1>
+  <h1 class="break-words w-full text-sm text-gray-500"><%= task.description %></h1>
 </div>

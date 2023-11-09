@@ -1,7 +1,5 @@
-<%= render 'shared/modal', title: "New To Do list" do %>
-  <div class="w-1/2">
-    <%= form_with(model: @to_do_list, class: "mb-7") do |form| %>
-      <%= render "form", form: %>
-    <% end %>
-  </div>
+<%= render 'shared/modal', title: "Edit To Do list" do %>
+  <%= form_with(model: @to_do_list, class: "mb-7") do |form| %>
+    <%= render "form", form: %>
+  <% end %>
 <% end %>  

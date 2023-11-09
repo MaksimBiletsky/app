@@ -1,5 +1,7 @@
 <%= form_with(model: @to_do_list, url: create_from_template_to_do_lists_path, class: "mb-7") do |form| %>
   <%= form.label :template_id %>
   <%= form.select :template_id, ToDoList.templates.collect {|t| [ t.title, t.id ] }, {}, class: "inline-block w-96 px-3 py-2 mt-2 shadow rounded-md border border-gray-200 outline-none" %>  
-  <%= form.submit "Save", class: "px-4 py-2 my-2 bg-blue-600 text-white rounded cursor-pointer" %>
+  <div class="flex justify-end w-full">
+    <%= form.submit "Save", class: "px-4 py-2 my-2 bg-blue-600 text-white rounded cursor-pointer" %>
+  </div>
 <% end %>

@@ -1,11 +1,9 @@
 <%= render 'shared/modal', title: "New To Do list" do %>
-  <div class="w-1/2 my-4">
-    <% if params[:from_template] %>
-      <%= render "new_from_template" %>
-    <% else %>
-      <%= form_with(model: @to_do_list, class: "mb-7") do |form| %>
-        <%= render "form", form: %>
-      <% end %>
+  <% if params[:from_template] %>
+    <%= render "new_from_template" %>
+  <% else %>
+    <%= form_with(model: @to_do_list, class: "mb-7") do |form| %>
+      <%= render "form", form: %>
     <% end %>
-  </div>
+  <% end %>
 <% end %>  
