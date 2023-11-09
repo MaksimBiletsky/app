@@ -1,28 +1,32 @@
 <div class="w-full bg-yellow-200 my-2 px-4" id=<%= dom_id section %>>
   <div class="flex justify-between items-center">
     <h1><%= section.title %></h1>
-    <div class="flex gap-1">
-      <%= link_to edit_to_do_list_section_path(section.to_do_list, section), class: "flex justify-center gap-1 items-center group text-blue-500", data: { turbo_frame: "modal" } do %>
-        <span><%= heroicon "pencil-square", variant: :outline, options: { class: "h-5 w-6" } %></span>
-      <% end %>
-      <%= link_to to_do_list_section_path(section.to_do_list, section), data: { turbo_method: :delete }, class: "flex justify-center gap-1 items-center group text-red-500" do %>
-        <span><%= heroicon "trash", variant: :outline, options: { class: "h-5 w-6" } %></span>
-      <% end %>
-    </div>
+    <% unless section.to_do_list.is_template %>
+      <div class="flex gap-1">
+        <%= link_to edit_to_do_list_section_path(section.to_do_list, section), class: "flex justify-center gap-1 items-center group text-blue-500", data: { turbo_frame: "modal" } do %>
+          <span><%= heroicon "pencil-square", variant: :outline, options: { class: "h-5 w-6" } %></span>
+        <% end %>
+        <%= link_to to_do_list_section_path(section.to_do_list, section), data: { turbo_method: :delete }, class: "flex justify-center gap-1 items-center group text-red-500" do %>
+          <span><%= heroicon "trash", variant: :outline, options: { class: "h-5 w-6" } %></span>
+        <% end %>
+      </div>
+    <% end %>
   </div>
   <div class="px-6">
     <div id="section_<%= section.id %>_tasks">
       <%= render section.tasks %>
     </div>
   </div>
-  <div class="flex justify-center">
-    <div class="w-1/2 p-2 text-sm">
-      <div class="p-1 w-full text-gray-500 hover:text-gray-950 hover:border border-blue-300 border-dashed">
-        <%= link_to new_to_do_list_section_task_path(section.to_do_list.id, section.id), class: "flex justify-center gap-1 items-center group", data: { turbo_frame: "modal" } do %>
-          <span><%= heroicon "plus", variant: :solid, options: { class: "h-5 w-6 " } %></span>
-          <span> Add Task</span>
-        <% end %>
+  <% unless section.to_do_list.is_template %>
+    <div class="flex justify-center">
+      <div class="w-1/2 p-2 text-sm">
+        <div class="p-1 w-full text-gray-500 hover:text-gray-950 hover:border border-blue-300 border-dashed">
+          <%= link_to new_to_do_list_section_task_path(section.to_do_list.id, section.id), class: "flex justify-center gap-1 items-center group", data: { turbo_frame: "modal" } do %>
+            <span><%= heroicon "plus", variant: :solid, options: { class: "h-5 w-6 " } %></span>
+            <span> Add Task</span>
+          <% end %>
+        </div>
       </div>
-    </div>
-  </div>  
+    </div>  
+  <% end %>
 </div>

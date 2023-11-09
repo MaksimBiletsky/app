@@ -48,6 +48,7 @@ gem 'devise'
 
 gem "heroicon", "~> 1.0"
 
+gem 'deep_cloneable', '~> 3.2.0'
 
 # Use Sass to process CSS
 # gem "sassc-rails"

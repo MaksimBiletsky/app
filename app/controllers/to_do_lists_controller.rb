@@ -1,6 +1,6 @@
 class ToDoListsController < ApplicationController
   
-  before_action :set_to_do_list, only: %i[edit update destroy]
+  before_action :set_to_do_list, only: %i[edit update destroy create_template]
   
   def new
     @to_do_list = ToDoList.new
@@ -10,6 +10,16 @@ class ToDoListsController < ApplicationController
     @to_do_list = ToDoList.new(to_do_list_params)
     if @to_do_list.save
       render
+    else
+      render :new, status: :unprocessable_entity
+    end
+  end
+
+  def create_from_template
+    template = ToDoList.templates.find_by(id: params.dig(:to_do_list, :template_id))
+    @to_do_list = ToDoListFromTemplateCreator.call(template)
+    if @to_do_list.save
+      render :create
     else
       render :new, status: :unprocessable_entity
     end
