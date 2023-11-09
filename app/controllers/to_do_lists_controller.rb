@@ -1,6 +1,7 @@
 class ToDoListsController < ApplicationController
-  
+  before_action :authenticate_user!
   before_action :set_to_do_list, only: %i[edit update destroy create_template]
+  before_action :authorize_user, only: %i[edit update destroy]
   
   def new
     @to_do_list = ToDoList.new
@@ -8,6 +9,7 @@ class ToDoListsController < ApplicationController
 
   def create
     @to_do_list = ToDoList.new(to_do_list_params)
+    @to_do_list.user = current_user
     if @to_do_list.save
       render
     else
@@ -17,7 +19,7 @@ class ToDoListsController < ApplicationController
 
   def create_from_template
     template = ToDoList.templates.find_by(id: params.dig(:to_do_list, :template_id))
-    @to_do_list = ToDoListFromTemplateCreator.call(template)
+    @to_do_list = ToDoListFromTemplateCreator.call(template, current_user)
     if @to_do_list.save
       render :create
     else
@@ -47,5 +49,9 @@ class ToDoListsController < ApplicationController
 
   def set_to_do_list
     @to_do_list = ToDoList.find_by(id: params[:id])
+  end
+
+  def authorize_user
+    authorize @to_do_list
   end
 end

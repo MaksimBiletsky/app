@@ -1,9 +1,9 @@
 class TemplatesController < ApplicationController
-  
+  before_action :authenticate_user!
   before_action :set_to_do_list, only: %i[new create]
   
   def index
-    @templates = ToDoList.templates
+    @templates = ToDoList.templates.where(user: current_user)
   end
 
   def new
@@ -11,7 +11,9 @@ class TemplatesController < ApplicationController
   end
 
   def create
-    if TemplateCreator.call(@to_do_list, params.dig(:to_do_list, :title))
+    @template = TemplateCreator.call(@to_do_list, params.dig(:to_do_list, :title))
+    @template.user = current_user
+    if @template.save
       flash[:notice] = "Template successfully created."
     else
       flash[:error] = "Something went wrong."

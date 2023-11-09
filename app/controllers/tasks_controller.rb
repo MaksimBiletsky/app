@@ -1,7 +1,8 @@
 class TasksController < ApplicationController
-  
+  before_action :authenticate_user!
   before_action :set_section
   before_action :set_task, only: %i[edit update destroy]
+  before_action :authorize_user
   
   def new
     @task = Task.new
@@ -42,5 +43,9 @@ class TasksController < ApplicationController
 
   def set_task
     @task = Task.find_by(id: params[:id])  
+  end
+
+  def authorize_user
+    authorize @section.to_do_list, :update?
   end
 end

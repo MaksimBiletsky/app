@@ -23,7 +23,10 @@
         <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "p-2 hover:bg-blue-300 hover:rounded-xl" %>
       <% else %>
         <div class="font-semibold"> You are not signed in, but still can view lists! </div> 
-        <%= button_to "Sign in", new_user_session_path %>
+        <div class="flex gap-5">
+          <%= link_to "Sign in", new_user_session_path, class: "p-2 hover:bg-blue-300 hover:rounded-xl" %>
+          <%= link_to 'Sign Up', new_user_registration_path, class: "p-2 hover:bg-blue-300 hover:rounded-xl"%>
+        </div>
       <% end %>
     </nav>
     <p class="notice"><%= notice %></p>

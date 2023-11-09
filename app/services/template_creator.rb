@@ -13,6 +13,6 @@ class TemplateCreator < ApplicationService
         kopy.title = title
       end
     end
-    copied.save
+    copied
   end
 end

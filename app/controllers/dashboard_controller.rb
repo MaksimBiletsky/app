@@ -1,6 +1,7 @@
 class DashboardController < ApplicationController
   def index
-    @to_do_lists = ToDoList.all
+    @my_to_do_lists = ToDoList.where(user: current_user) if current_user
+    @to_do_lists = ToDoList.where.not(user: current_user)
     render
   end
 end

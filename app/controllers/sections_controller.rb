@@ -1,7 +1,8 @@
 class SectionsController < ApplicationController  
-  
+  before_action :authenticate_user!
   before_action :set_to_do_list
   before_action :set_section, only: %i[edit update destroy]
+  before_action :authorize_user
   
   def new
     @section = Section.new
@@ -42,5 +43,9 @@ class SectionsController < ApplicationController
 
   def set_section
     @section = Section.find_by(id: params[:id])
+  end
+
+  def authorize_user
+    authorize @to_do_list, :update?
   end
 end

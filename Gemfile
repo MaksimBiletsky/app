@@ -50,6 +50,8 @@ gem "heroicon", "~> 1.0"
 
 gem 'deep_cloneable', '~> 3.2.0'
 
+gem 'pundit'
+
 # Use Sass to process CSS
 # gem "sassc-rails"
 

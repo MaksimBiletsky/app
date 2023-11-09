@@ -1,13 +1,16 @@
 class ToDoListFromTemplateCreator < ApplicationService
-  attr_accessor :template
+  attr_accessor :template, :user
 
-  def initialize(template)
+  def initialize(template, user)
     @template = template  
   end
 
   def call
     copied = template.deep_clone(include: {sections: :tasks}) do |original, kopy|
-      kopy.is_template = false if kopy.is_a?(ToDoList)
+      if kopy.is_a?(ToDoList)
+        kopy.is_template = false 
+        kopy.user = user
+      end
     end
     copied
   end
