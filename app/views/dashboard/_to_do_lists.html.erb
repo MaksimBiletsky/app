@@ -6,8 +6,8 @@
       <%= link_to "New From Template", new_to_do_list_path(from_template: true), class: "px-4 py-2 bg-blue-600 text-white rounded", data: { turbo_frame: "modal" } %>
     </div>
   </div>
-  <div class="flex gap-1 my-5 w-full flex-wrap w-full justify-center">
-    <% my_to_do_lists.each do |to_do_list| %>
+  <div class="flex gap-1 my-5 w-full flex-wrap w-full justify-center" data-controller="drag" data-drag-url="/to_do_lists/:id/move">
+    <% my_to_do_lists.sort_by(&:position).each do |to_do_list| %>
       <%= render to_do_list, user: user %>
     <% end %>
   </div>

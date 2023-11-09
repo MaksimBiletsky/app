@@ -1,6 +1,6 @@
 class ToDoListsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_to_do_list, only: %i[edit update destroy create_template]
+  before_action :set_to_do_list, only: %i[edit update destroy create_template move]
   before_action :authorize_user, only: %i[edit update destroy]
   
   def new
@@ -38,6 +38,11 @@ class ToDoListsController < ApplicationController
 
   def destroy
     @to_do_list.destroy
+  end
+
+  def move
+    @to_do_list.insert_at(params[:position].to_i)
+    head :ok
   end
 
   private

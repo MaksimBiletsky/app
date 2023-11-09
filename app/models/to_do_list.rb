@@ -1,6 +1,8 @@
 class ToDoList < ApplicationRecord
   include DashboardBroadcastable
 
+  acts_as_list
+
   validates :title, presence: true
 
   has_many :sections, dependent: :destroy

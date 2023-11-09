@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :sections
   resources :templates, only: %i[new create index]
   resources :to_do_lists do
+    patch :move, on: :member
     post :create_from_template, on: :collection
     resources :sections do
       resources :tasks
