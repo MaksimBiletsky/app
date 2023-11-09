@@ -14,9 +14,9 @@
 
   <body>
     <nav class="flex justify-between p-5 bg-blue-200 shadow-md items-center">
-      <% if user_signed_in? %>
+      <% if Current.user.present? %>
         <div class="flex gap-5 items-center">
-          <div class="font-semibold"> <%= current_user.email %> </div>
+          <div class="font-semibold"> <%= Current.user.email %> </div>
           <%= link_to "Dashboard", root_path, class: "p-2 hover:bg-blue-300 hover:rounded-xl" %>
           <%= link_to "My templates", templates_path, class: "p-2 hover:bg-blue-300 hover:rounded-xl" %>
         </div>

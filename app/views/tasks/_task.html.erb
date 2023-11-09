@@ -1,8 +1,8 @@
 <div class="w-full bg-yellow-200 my-2" id=<%= dom_id task %>>
   <div class="flex items-center">
     <h1 class="px-6"><%= task.title %></h1>
-    <% unless task.section.to_do_list.is_template || !user_signed_in? %>
-      <% if policy(task.section.to_do_list).update? %>
+    <% unless task.section.to_do_list.is_template || user.blank? %>
+      <% if user_policy %>
         <div class="flex gap-1">
           <%= link_to edit_to_do_list_section_task_path(task.section.to_do_list, task.section, task), class: "flex justify-center gap-1 items-center group text-blue-500", data: { turbo_frame: "modal" } do %>
             <span><%= heroicon "pencil-square", variant: :outline, options: { class: "h-5 w-6" } %></span>

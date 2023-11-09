@@ -9,7 +9,6 @@ class ToDoListsController < ApplicationController
 
   def create
     @to_do_list = ToDoList.new(to_do_list_params)
-    @to_do_list.user = current_user
     if @to_do_list.save
       render
     else
@@ -19,7 +18,7 @@ class ToDoListsController < ApplicationController
 
   def create_from_template
     template = ToDoList.templates.find_by(id: params.dig(:to_do_list, :template_id))
-    @to_do_list = ToDoListFromTemplateCreator.call(template, current_user)
+    @to_do_list = ToDoListFromTemplateCreator.call(template, Current.user)
     if @to_do_list.save
       render :create
     else

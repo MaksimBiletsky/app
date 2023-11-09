@@ -1,12 +1,13 @@
 <div class="w-1/4 border-2 shadow-md rounded-xl flex flex-col gap-2" id=<%= dom_id to_do_list %>>
+  <% user_policy = ToDoListPolicy.new(user, to_do_list).update? %>
   <div class="flex justify-between items-center p-2 font-semibold text-lg bg-slate-100">
     <div><%= to_do_list.title %></div>
-    <% unless to_do_list.is_template || !user_signed_in? %>
+    <% unless to_do_list.is_template || user.blank? %>
       <div class="flex gap-1">
         <%= link_to new_template_path(to_do_list_id: to_do_list.id), data: { turbo_frame: "modal" }, class: "flex justify-center gap-1 items-center group text-blue-500" do %>
           <span><%= heroicon "arrow-down-on-square-stack", variant: :outline, options: { class: "h-5 w-6" } %></span>
         <% end %>
-        <% if policy(to_do_list).update? %>
+        <% if user_policy %>
           <%= link_to edit_to_do_list_path(to_do_list), class: "flex justify-center gap-1 items-center group text-blue-500", data: { turbo_frame: "modal" } do %>
             <span><%= heroicon "pencil-square", variant: :outline, options: { class: "h-5 w-6" } %></span>
           <% end %>
@@ -19,9 +20,11 @@
   </div>
   <div class="p-2 font-medium text-sm"><%= to_do_list.description %></div>
   <div id="to_do_list_<%= to_do_list.id %>_sections">
-    <%= render to_do_list.sections %>
+    <% to_do_list.sections.each do |section|%>
+      <%= render section, user_policy: user_policy, user: user %>
+    <% end %>
   </div>
-  <% unless to_do_list.is_template || !user_signed_in? || !policy(to_do_list).update? %>
+  <% unless to_do_list.is_template || user.blank? || !user_policy %>
     <div class="w-full p-2 text-sm">
       <div class="p-1 w-full text-gray-500 hover:text-gray-950 hover:border border-blue-300 border-dashed">
         <%= link_to new_to_do_list_section_path(to_do_list), class: "flex justify-center gap-1 items-center group", data: { turbo_frame: "modal" } do %>
