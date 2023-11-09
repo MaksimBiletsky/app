@@ -7,12 +7,11 @@ class TemplateCreator < ApplicationService
   end
 
   def call
-    copied = to_do_list.deep_clone(include: {sections: :tasks}) do |original, kopy|
+    to_do_list.deep_clone(include: { sections: :tasks }) do |_original, kopy|
       if kopy.is_a?(ToDoList)
-        kopy.is_template = true 
+        kopy.is_template = true
         kopy.title = title
       end
     end
-    copied
   end
 end

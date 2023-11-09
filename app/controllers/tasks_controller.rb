@@ -3,7 +3,7 @@ class TasksController < ApplicationController
   before_action :set_section
   before_action :set_task, only: %i[edit update destroy]
   before_action :authorize_user
-  
+
   def new
     @task = Task.new
   end
@@ -30,7 +30,7 @@ class TasksController < ApplicationController
   def destroy
     @task.destroy
   end
-  
+
   private
 
   def task_params
@@ -42,7 +42,7 @@ class TasksController < ApplicationController
   end
 
   def set_task
-    @task = Task.find_by(id: params[:id])  
+    @task = Task.find_by(id: params[:id])
   end
 
   def authorize_user

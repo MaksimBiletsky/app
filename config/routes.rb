@@ -8,7 +8,7 @@ Rails.application.routes.draw do
       resources :tasks
     end
   end
-  root to: "dashboard#index" 
+  root to: "dashboard#index"
 
   devise_for :users
 end

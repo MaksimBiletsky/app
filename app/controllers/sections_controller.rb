@@ -1,9 +1,9 @@
-class SectionsController < ApplicationController  
+class SectionsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_to_do_list
   before_action :set_section, only: %i[edit update destroy]
   before_action :authorize_user
-  
+
   def new
     @section = Section.new
   end
@@ -30,7 +30,7 @@ class SectionsController < ApplicationController
   def destroy
     @section.destroy
   end
-  
+
   private
 
   def section_params

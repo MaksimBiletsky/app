@@ -1,7 +1,7 @@
 class TemplatesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_to_do_list, only: %i[new create]
-  
+
   def index
     @templates = ToDoList.templates.where(user: Current.user)
   end

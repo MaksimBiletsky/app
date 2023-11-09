@@ -1,8 +1,8 @@
 class ToDoListsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_to_do_list, only: %i[edit update destroy create_template move]
+  before_action :set_to_do_list, only: %i[edit update destroy move]
   before_action :authorize_user, only: %i[edit update destroy]
-  
+
   def new
     @to_do_list = ToDoList.new
   end
@@ -33,7 +33,7 @@ class ToDoListsController < ApplicationController
       render
     else
       render :edit, status: :unprocessable_entity
-    end    
+    end
   end
 
   def destroy

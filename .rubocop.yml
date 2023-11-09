@@ -1,0 +1,62 @@
+require:
+  - rubocop-rails
+  - rubocop-minitest
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+Style/FrozenStringLiteralComment:
+  EnforcedStyle: never
+
+Style/HashSyntax:
+  EnforcedStyle: ruby19
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Layout/LineLength:
+  Max: 160
+
+Metrics/AbcSize:
+  Exclude:
+    - 'app/models/charts/*'
+
+Metrics/BlockLength:
+  Exclude:
+    - 'config/environments/*'
+    - 'config/routes.rb'
+    - 'app/admin/*'
+
+Style/GlobalStdStream:
+  Exclude:
+    - 'config/**/*'
+
+Lint/UnusedBlockArgument:
+  Exclude:
+    - 'app/admin/users.rb'
+
+Rails/SkipsModelValidations:
+  Enabled: false
+
+Rails/HasAndBelongsToMany:
+  Enabled: false
+
+AllCops:
+  Exclude:
+    - 'vendor/**/*'
+    - 'db/migrate/*'
+    - 'db/schema.rb'
+    - 'db/seeds.rb'
+    - 'bin/*'
+    - 'config/puma.rb'
+
+  TargetRubyVersion: 3.1
+
+# https://github.com/rubocop/ruby-style-guide/issues/809#issuecomment-673096138
+Lint/MissingSuper:
+  Exclude:
+    - 'app/services/**/*'
+    - 'app/policies/**/*'
