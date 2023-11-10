@@ -1,4 +1,4 @@
 <%= turbo_frame_tag "modal" %>
-<%= turbo_stream_from "dashboard_#{Current.user.id}"%>
+<%= turbo_stream_from Current.user ? "dashboard_#{Current.user.id}" : "dashboard"%>
 
 <%= render "to_do_lists", my_to_do_lists: @my_to_do_lists, to_do_lists: @to_do_lists, user: Current.user %>

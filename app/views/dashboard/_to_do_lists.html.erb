@@ -1,20 +1,22 @@
 <div id="to_do_lists">
-  <div class="flex justify-between items-center">
-    <h1 class="font-bold text-xl">My To Do lists</h1>
-    <div>
-      <%= link_to "New To Do list", new_to_do_list_path, class: "px-4 py-2 bg-blue-600 text-white rounded", data: { turbo_frame: "modal" } %>
-      <%= link_to "New From Template", new_to_do_list_path(from_template: true), class: "px-4 py-2 bg-blue-600 text-white rounded", data: { turbo_frame: "modal" } %>
+  <% if user %>
+    <div class="flex justify-between items-center">
+      <h1 class="font-bold text-xl">My To Do lists</h1>
+      <div>
+        <%= link_to "New To Do list", new_to_do_list_path, class: "px-4 py-2 bg-blue-600 text-white rounded", data: { turbo_frame: "modal" } %>
+        <%= link_to "New From Template", new_to_do_list_path(from_template: true), class: "px-4 py-2 bg-blue-600 text-white rounded", data: { turbo_frame: "modal" } %>
+      </div>
     </div>
-  </div>
-  <div class="flex gap-1 my-5 w-full flex-wrap w-full justify-center" data-controller="drag" data-drag-url="/to_do_lists/:id/move">
-    <% my_to_do_lists.sort_by(&:position).each do |to_do_list| %>
-      <%= render to_do_list, user: user %>
-    <% end %>
-  </div>
-  <hr>
+    <div class="flex gap-1 my-5 w-full flex-wrap w-full justify-center" data-controller="drag" data-drag-url="/to_do_lists/:id/move">
+      <% my_to_do_lists.sort_by(&:position).each do |to_do_list| %>
+        <%= render to_do_list, user: user %>
+      <% end %>
+    </div>
+    <hr>
+  <% end %>
   <h1 class="font-bold text-xl my-5">To Do lists from other users</h1>
   <div class="flex gap-5 my-5 w-full flex-wrap justify-center">
-    <% to_do_lists.each do |to_do_list| %>
+    <% to_do_lists.sort_by(&:created_at).each do |to_do_list| %>
       <%= render to_do_list, user: user %>
     <% end %>
   </div>
