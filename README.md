@@ -9,4 +9,5 @@ rails db:create
 rails db:seed
 rails db:migrate
 rails s
+rails tailwindcss:watch 
 ```
